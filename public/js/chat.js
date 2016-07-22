@@ -164,7 +164,6 @@ $(function(){
 
 	socket.on('startChat', function(data){
 		console.log(data);
-		console.log(data.langs)
 		if(data.boolean && data.id == id) {
 
 			chats.empty();
@@ -179,9 +178,9 @@ $(function(){
 			//Changing langs
 			if(data.langs.length >= 2) {
 				if(name === data.users[0]) {
-					translateLang = data.langs[1];
+					translateLang = data.langs[0]+"-"+data.langs[1]; //1st
 				}else{
-					translateLang = data.langs[0];
+					translateLang = data.langs[1]+"-"+data.langs[0]; //2st
 				}
 			}
 
@@ -235,7 +234,7 @@ $(function(){
 		// Create a new chat message and display it directly
 		sendData.text = textarea.val(); //Сообщение 
   	sendData.lang = translateLang; //Язык перевода
-		console.log("Lang translate - " + translateLang)
+		console.log("Translate: " + translateLang)
 
 		//Send request to Yandex.API
 		$.getJSON(url + action.translate, sendData, function(responseData){
