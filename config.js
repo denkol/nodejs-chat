@@ -1,6 +1,6 @@
 // This file handles the configuration of the app.
 // It is required by app.js
-var url = "https://translate.yandex.net/api/v1.5/tr.json/translate";
+
 var express = require('express');
 
 module.exports = function(app, io){

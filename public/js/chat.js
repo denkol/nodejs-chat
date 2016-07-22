@@ -1,13 +1,28 @@
-// This file is executed in the browser, when people visit /chat/<random id>
+ // This file is executed in the browser, when people visit /chat/<random id>
 
 $(function(){
-	//URl API переводчика
-	var url = "https://translate.yandex.net/api/v1.5/tr.json/translate";
-	//Передаваемые данные
-	var sendData = {
-  	"key" : "trnsl.1.1.20160706T224459Z.8bd4ccff283a1e4d.2530860c792d839a3b9d68a48cfcfe51155bac1b",
-  	"lang" : "en"
+	
+	//API Yandex.Translate 
+	var url = "https://translate.yandex.net/api/v1.5/tr.json/";
+	var key = "trnsl.1.1.20160706T224459Z.8bd4ccff283a1e4d.2530860c792d839a3b9d68a48cfcfe51155bac1b";
+	
+	//API's methods
+	var action = {
+  	translate : "translate",
+  	detect : "detect",
+  	getLangs : "getLangs" 
 	};
+	
+	//Параметры отправляемые в API Яндекс.Переводчик
+	var sendData = {
+  	"key" : key,
+	};
+	
+	//Язык системы или браузера (должна определяться автоматически)
+	var browserLang = navigator.language.split('-')[0];
+	
+	//Language when text be translated
+	var translateLang; 
 
 	// getting the id of the room from the url
 	var id = Number(window.location.pathname.match(/\/chat\/(\d+)$/)[1]);
@@ -38,8 +53,10 @@ $(function(){
 		loginForm = $(".loginForm"),
 		yourName = $("#yourName"),
 		yourEmail = $("#yourEmail"),
+		yourLang = $("#yourSelect"),
 		hisName = $("#hisName"),
 		hisEmail = $("#hisEmail"),
+		hisLang = $("#hisSelect"),
 		chatForm = $("#chatform"),
 		textarea = $("#message"),
 		messageTimeSent = $(".timesent"),
@@ -53,7 +70,6 @@ $(function(){
 
 	// on connection to server get the id of person's room
 	socket.on('connect', function(){
-
 		socket.emit('load', id);
 	});
 
@@ -66,7 +82,9 @@ $(function(){
 	socket.on('peopleinchat', function(data){
 
 		if(data.number === 0){
-
+			
+			showSelect(yourLang);
+			
 			showMessage("connected");
 
 			loginForm.on('submit', function(e){
@@ -79,18 +97,21 @@ $(function(){
 					alert("Please enter a nick name longer than 1 character!");
 					return;
 				}
-
+				
+				lang = yourLang.val();
+				
 				email = yourEmail.val();
 
 				if(!isValid(email)) {
 					alert("Please enter a valid email!");
 				}
+				
 				else {
 
 					showMessage("inviteSomebody");
 
 					// call the server-side function 'login' and send user's parameters
-					socket.emit('login', {user: name, avatar: email, id: id});
+					socket.emit('login', {user: name, avatar: email, lang: lang, id: id});
 				}
 			
 			});
@@ -98,6 +119,8 @@ $(function(){
 
 		else if(data.number === 1) {
 
+			showSelect(hisLang);
+			
 			showMessage("personinchat",data);
 
 			loginForm.on('submit', function(e){
@@ -115,13 +138,17 @@ $(function(){
 					alert("There already is a \"" + name + "\" in this room!");
 					return;
 				}
+				
+				lang = hisLang.val();
+
 				email = hisEmail.val();
 
 				if(!isValid(email)){
 					alert("Wrong e-mail format!");
 				}
+
 				else {
-					socket.emit('login', {user: name, avatar: email, id: id});
+					socket.emit('login', {user: name, avatar: email, lang: lang, id: id});
 				}
 
 			});
@@ -137,17 +164,25 @@ $(function(){
 
 	socket.on('startChat', function(data){
 		console.log(data);
+		console.log(data.langs)
 		if(data.boolean && data.id == id) {
 
 			chats.empty();
 
 			if(name === data.users[0]) {
-
 				showMessage("youStartedChatWithNoMessages",data);
 			}
 			else {
-
 				showMessage("heStartedChatWithNoMessages",data);
+			}
+
+			//Changing langs
+			if(data.langs.length >= 2) {
+				if(name === data.users[0]) {
+					translateLang = data.langs[1];
+				}else{
+					translateLang = data.langs[0];
+				}
 			}
 
 			chatNickname.text(friend);
@@ -198,41 +233,30 @@ $(function(){
 		e.preventDefault();
 
 		// Create a new chat message and display it directly
+		sendData.text = textarea.val(); //Сообщение 
+  	sendData.lang = translateLang; //Язык перевода
+		console.log("Lang translate - " + translateLang)
 
-		showMessage("chatStarted");
+		//Send request to Yandex.API
+		$.getJSON(url + action.translate, sendData, function(responseData){
+    		
+    	//Save result
+    	var message = responseData.text + ''; 
 
-		if(textarea.val().trim().length) {
-			createChatMessage(textarea.val(), name, img, moment());
-			
-			sendData.text = textarea.val();
-			
-			scrollToBottom();
-				
-			// Send the message to the other person in the chat
-		  console.log('sendData.text - ' + sendData.text)
+    	showMessage("chatStarted");
 
-			var message = "";
-		  
-		  $.ajax({
-		    url: url,
-		    dataType: 'json',
-		    data: sendData,
-		    async: false,
-		    success: function(response){ 
-		    	message = response.text;
-		    }
-		  });
-	
-console.log(message);
-			
-				socket.emit('msg', {msg: message, user: name, img: img}) 
-			
+			if(textarea.val().trim().length) {
+				createChatMessage(textarea.val(), name, img, moment());
+				scrollToBottom();
 
-			
+				// Send the message to the other person in the chat
+				socket.emit('msg', {msg: message, user: name, img: img});
+
 			}
+			// Empty the textarea
+			textarea.val("");
+  	});
 		
-		// Empty the textarea
-		textarea.val("");
 	});
 
 	// Update the relative time stamps on the chat messages every minute
@@ -361,6 +385,19 @@ console.log(message);
 			section.children().css('display', 'none');
 			tooManyPeople.fadeIn(1200);
 		}
+	}
+	
+	function showSelect(select) {
+		sendData.ui = browserLang; //Option language
+		$.getJSON(url + action.getLangs, sendData, function(response){
+			var langs = response.langs;
+			$.each(langs, function(key, value) {
+    		select.append('<option value=' + key + '>' + value + '</option>');
+			});
+			select.val(browserLang); //Set default lang
+			select.prop('disabled', false); //Enable <select>
+		});
+		delete sendData.ui;
 	}
 
 });
