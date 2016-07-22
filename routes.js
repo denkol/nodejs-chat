@@ -63,14 +63,14 @@ module.exports = function(app,io){
 		// When the client emits 'login', save his name and avatar,
 		// and add them to the room
 		socket.on('login', function(data) {
-
+			
 			var room = findClientsSocket(io, data.id);
 			// Only two people per room are allowed
 			if (room.length < 2) {
 
 				// Use the socket object to store data. Each client gets
 				// their own unique socket object
-
+				socket.lang = data.lang;
 				socket.username = data.user;
 				socket.room = data.id;
 				socket.avatar = gravatar.url(data.avatar, {s: '140', r: 'x', d: 'mm'});
@@ -85,10 +85,14 @@ module.exports = function(app,io){
 				if (room.length == 1) {
 
 					var usernames = [],
+							langs = [],
 						avatars = [];
 
 					usernames.push(room[0].username);
 					usernames.push(socket.username);
+
+					langs.push(room[0].lang);
+					langs.push(socket.lang);
 
 					avatars.push(room[0].avatar);
 					avatars.push(socket.avatar);
@@ -100,6 +104,7 @@ module.exports = function(app,io){
 						boolean: true,
 						id: data.id,
 						users: usernames,
+						langs: langs,
 						avatars: avatars
 					});
 				}
@@ -107,6 +112,10 @@ module.exports = function(app,io){
 			else {
 				socket.emit('tooMany', {boolean: true});
 			}
+
+			//Logs on terminal
+			console.log(socket.room + " + " + socket.username + " + " + socket.lang); 
+			
 		});
 
 		// Somebody left the chat

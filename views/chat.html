@@ -20,6 +20,15 @@
 
 <body>
 
+	<header class="banner">
+
+		<h1 class="bannertext">
+			<a href="http://tutorialzine.com/2014/03/nodejs-private-webchat/" id="logo">Tutorial<span>zine</span>: NODE.JS CHAT TUTORIAL</a>
+		</h1>
+
+	</header>
+
+
 	<section class="section">
 
 		<!-- These elements are displayed as white info cards in the middle of the screen -->
@@ -35,6 +44,7 @@
 				<form class="loginForm">
 					<input type="text" id="yourName" placeholder="Your nick name" /><br/>
 					<input type="text" id="yourEmail" placeholder="Your email address" /><br/>
+					<select id="yourSelect" disabled></select>
 					<input type="submit" id="yourEnter" value="ENTER" />
 				</form>
 
@@ -53,6 +63,7 @@
 				<form class="loginForm">
 					<input type="text" id="hisName" placeholder="Your nick name" /><br/>
 					<input type="text" id="hisEmail" placeholder="Your email address" /><br/>
+					<select id="hisSelect" disabled></select>
 					<input type="submit" id="hisEnter" value="CHAT" />
 				</form>
 
