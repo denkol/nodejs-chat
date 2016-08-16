@@ -3,22 +3,27 @@
 // and listens for socket.io messages.
 
 // Use the gravatar module, to turn email addresses into avatar images:
-
 var gravatar = require('gravatar');
+
+//Logs module
+var log4js = require('log4js');
+var logger = log4js.getLogger();
 
 // Export a function, so that we can pass 
 // the app and io instances from the app.js file:
 
 module.exports = function(app,io){
+	
 
 	app.get('/', function(req, res){
+		logger.info(req.connection.remoteAddress, req.method, req.url, req.headers['user-agent']);
 
 		// Render views/home.html
 		res.render('home');
 	});
 
 	app.get('/create', function(req,res){
-
+		
 		// Generate unique id for the room
 		var id = Math.round((Math.random() * 1000000));
 
@@ -27,7 +32,7 @@ module.exports = function(app,io){
 	});
 
 	app.get('/chat/:id', function(req,res){
-
+		logger.info(req.connection.remoteAddress, req.method, req.url, req.headers['user-agent']);
 		// Render the chant.html view
 		res.render('chat');
 	});

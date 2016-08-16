@@ -11,8 +11,9 @@
     "ejs": "^1.0.0",
     "express": "^4.8.2",
     "gravatar": "~1.0.6",
+    "log4js": "^0.6.38",
     "socket.io": "1.0.6"
-  }, 
+  },
   "devDependencies": {
     "autoprefixer": "^6.3.7",
     "cssnext": "^1.8.4",

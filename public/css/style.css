@@ -346,7 +346,8 @@ input, select {
 
 .wrapper {
   min-height: 100%;
-  margin: 0 auto -100px;
+  position: relative;
+  margin: 0 auto -120px;
   padding-top: 20px;
 }
 
@@ -417,7 +418,6 @@ input, select {
 }
 
 footer {
-  height: 100px;
   font-weight: 100;
   position: relative;
   bottom: 0;
