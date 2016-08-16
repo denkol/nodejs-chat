@@ -1,0 +1,100 @@
+//Chat page 
+$chat-header-height: 10%
+$chat-mainCard-height: 650px
+$chat-fieldBlock-height: 15%
+$chat-messages-height: 100% - ($chat-header-height + $chat-fieldBlock-height)
+
+$chat-avatar-size: 40px
+
+.chat
+  text-align: center
+  
+  .mainCard
+    padding: 0
+    height: $chat-mainCard-height
+  
+  &__header
+    padding: 0 20px
+    border-bottom: 1px solid #eee    
+    width: 100%
+    height: $chat-header-height  
+
+  &__messages
+    padding: 20px
+    position: relative
+    overflow-y: scroll
+    height: $chat-messages-height
+    &::-webkit-scrollbar  //Hide scrollbar
+      display: none
+    
+  &__fieldBlock
+    padding: 10px 20px
+    overflow: hidden //Clearfix
+    height: $chat-fieldBlock-height
+    border-top: 1px solid #eee
+
+  .profileImg
+    height: $chat-avatar-size
+    width: $chat-avatar-size
+    background: url("../img/unnamed.svg") no-repeat
+    background-position: center center
+    background-size: cover
+    border: 2px solid $dark-color
+    border-radius: 100%
+    float: left
+  
+  .profileImg, .fieldSend, .hisName //Vertical centering elements
+    position: relative
+    top: 50%
+    transform: translateY(-50%)
+    
+  //chat__header
+  .headerProfile
+    float: left
+    height: 100%
+    
+  .hisName
+    font-weight: 800
+    padding: 0 15px
+    font-size: 18px
+    display: inline-block
+    
+  .profileCountry
+    font-weight: 100
+    font-size: 10px  
+  
+
+  //chat__message
+  .messageFlow
+    overflow: auto
+
+  .messageFromWrap, .messageToWrap
+    width: 100%
+  
+
+  //chat__fieldBlock
+  .fieldProfile, .fieldMessage, .fieldSend, .fieldForm
+    height: 100%
+    
+  .fieldProfile
+    padding: 0 13px 0 10px 
+    float: left
+
+  .fieldMessage
+    padding: 0 10px
+    float: left
+    width: 81%
+
+  .fieldSend
+    float: right
+    height: auto
+
+  .messageArea
+    resize: none
+    font-size: 14px
+    border: 1px solid #eee
+    outline: none
+    padding: 10px
+    border-radius: 5px
+    width: 100%
+    height: 100%
