@@ -1,0 +1,984 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+  display: block;
+}
+
+audio, canvas, progress, video {
+  display: inline-block;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+template, [hidden] {
+  display: none;
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+a:active, a:hover {
+  outline-width: 0;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+
+b, strong {
+  font-weight: inherit;
+}
+
+b, strong {
+  font-weight: bolder;
+}
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Add the correct background and color in IE 9-.
+ */
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+ * ==========================================================================
+ */
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+img {
+  border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+ * ==========================================================================
+ */
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
+}
+
+/**
+ * Add the correct margin in IE 8.
+ */
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+hr {
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */
+}
+
+/* Forms
+ * ==========================================================================
+ */
+/**
+ * 1. Change font properties to `inherit` in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
+ */
+button, input, select, textarea {
+  font: inherit;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+}
+
+/**
+ * Restore the font weight unset by the previous rule.
+ */
+optgroup {
+  font-weight: bold;
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button, input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+button, select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct the inability to style clickable types in iOS and Safari.
+ */
+button, html [type="button"], [type="reset"], [type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+button:-moz-focusring, [type="button"]:-moz-focusring, [type="reset"]:-moz-focusring, [type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Change the border, margin, and padding in all browsers (opinionated).
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+legend {
+  box-sizing: border-box;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  display: table;
+  /* 1 */
+  max-width: 100%;
+  /* 1 */
+  padding: 0;
+  /* 3 */
+  white-space: normal;
+  /* 1 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+[type="checkbox"], [type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+
+[type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.
+ */
+/**
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  color: #566181;
+  background-color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+input, select {
+  outline: none;
+}
+
+.wrapper {
+  min-height: 100%;
+  margin: 0 auto -100px;
+  padding-top: 20px;
+}
+
+@-webkit-keyframes logoLoading {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes logoLoading {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(5%);
+            transform: translateY(5%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(5%);
+            transform: translateY(5%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+footer {
+  height: 100px;
+  font-weight: 100;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-menu__item {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.footer-menu__item a {
+  color: #cccccc;
+}
+
+.copyright {
+  margin: 15px 0 0 0;
+}
+
+.copyright p {
+  margin: 0;
+  font-size: 13px;
+  color: #cccccc;
+}
+
+.defaultBtn {
+  height: 50px;
+  width: 120px;
+  text-align: center;
+  background-color: #566181;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  border-radius: 8px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.defaultBtn:hover {
+  cursor: pointer;
+  background-color: #6d799d;
+}
+
+.defaultBtn:active {
+  cursor: pointer;
+}
+
+.sendBtn {
+  text-transform: uppercase;
+  color: #566181;
+  background: transparent;
+  padding: 0;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.sendBtn:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.sendBtn:active {
+  cursor: pointer;
+}
+
+.circle {
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo .sizeNormal {
+  width: 200px;
+}
+
+.logo .sizeSmall {
+  width: 45px;
+}
+
+.logo .colorNormal .st0 {
+  fill: #E6E7E7;
+}
+
+.logo .colorNormal .st1 {
+  fill: #566181;
+}
+
+.logo .colorInvert .st0 {
+  fill: #566181;
+}
+
+.logo .colorInvert .st1 {
+  fill: #E6E7E7;
+}
+
+.logo .loading {
+  -webkit-animation-name: logoLoading;
+          animation-name: logoLoading;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  -webkit-animation-iteration-count: 2;
+          animation-iteration-count: 2;
+}
+
+.loginForm {
+  width: 300px;
+  margin: 0 auto 50px;
+}
+
+.loginForm__item {
+  text-align: left;
+  margin: 25px 0;
+}
+
+.loginForm label {
+  color: #566181;
+  font-weight: 100;
+  font-size: 20px;
+  display: block;
+  margin: 0 0 10px 0;
+}
+
+.loginForm input {
+  color: #566181;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #c8cddb;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.loginForm input:hover {
+  border: 2px solid #8b95b2;
+}
+
+.loginForm input:focus {
+  border: 2px solid #566181;
+}
+
+.loginForm select {
+  background-color: transparent;
+  border-radius: 8px;
+  border: 2px solid #c8cddb;
+  width: 100%;
+  text-indent: 9.01px;
+  color: #566181;
+  -webkit-appearance: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  height: 40px;
+}
+
+.loginForm select:after {
+  content: "";
+  position: relative;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 100px 100px 0 100px;
+  border-color: #566181 transparent transparent transparent;
+  right: 10px;
+}
+
+.loginForm select:hover {
+  border: 2px solid #8b95b2;
+}
+
+.loginForm select:focus {
+  border: 2px solid #566181;
+}
+
+.loginForm .inputError {
+  border: 2px solid orange;
+}
+
+.messageTo, .messageFrom {
+  height: auto;
+  width: auto;
+  max-width: 80%;
+  text-align: left;
+  padding: 20px;
+}
+
+.messageTo {
+  float: left;
+  background-color: #E6E7E7;
+  border-top-left-radius: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  color: #566181;
+}
+
+.messageFrom {
+  float: right;
+  background-color: #566181;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  color: #E6E7E7;
+}
+
+.messageMeta {
+  margin: 10px 0 0 0;
+  display: block;
+  font-size: 14px;
+  opacity: 0.3;
+}
+
+.messageText {
+  word-wrap: break-word;
+  margin: 0;
+  padding: 0;
+}
+
+.messageSender {
+  margin: 0 0 10px 0;
+  color: #566181;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.messageToWrap, .messageFromWrap {
+  overflow: hidden;
+  margin: 0 0 15px 0;
+  -webkit-animation-name: fadeInUp;
+          animation-name: fadeInUp;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-duration: 0.2s;
+          animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+.messageToWrap .messageSender {
+  text-align: left;
+}
+
+.messageFromWrap .messageSender {
+  text-align: right;
+}
+
+.noMessages {
+  color: #eee;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.register .data {
+  text-align: center;
+}
+
+.invite {
+  text-align: center;
+}
+
+.invite .twoUserPhoto {
+  margin: 0 0 20px 0;
+}
+
+.invite .twoUserPhoto > * {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.invite__description, .invite__link, .invite__share {
+  margin: 35px auto;
+}
+
+.invite__description {
+  font-size: 22px;
+  font-weight: 200;
+  color: #566181;
+  text-align: center;
+}
+
+.invite__link {
+  padding: 10px 15px;
+  background-color: #f3f3f3;
+  color: #566181;
+  border-radius: 10px;
+  font-weight: 100;
+  font-size: 24px;
+  text-align: center;
+}
+
+.invite__link a {
+  text-decoration: none;
+  color: #566181;
+}
+
+.invite__share .share__header {
+  color: #aab1c6;
+}
+
+.invite__share .share__icons > * {
+  color: #566181;
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 25px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.invite__share .share__icons > *:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.invite__share .share__icons > *:active {
+  cursor: pointer;
+}
+
+.moreIcon {
+  vertical-align: top;
+  height: 100px;
+  width: 100px;
+}
+
+.moreIcon svg {
+  position: relative;
+  top: 50%;
+  margin-top: -25px;
+  width: 50px;
+  fill: #566181;
+}
+
+.moreIcon .dot1 {
+  -webkit-animation: fadeOut;
+          animation: fadeOut;
+  -webkit-animation-delay: 600ms;
+          animation-delay: 600ms;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.moreIcon .dot2 {
+  -webkit-animation: fadeOut;
+          animation: fadeOut;
+  -webkit-animation-delay: 700ms;
+          animation-delay: 700ms;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.moreIcon .dot3 {
+  -webkit-animation: fadeOut;
+          animation: fadeOut;
+  -webkit-animation-delay: 800ms;
+          animation-delay: 800ms;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.chat {
+  text-align: center;
+}
+
+.chat .mainCard {
+  padding: 0;
+  height: 650px;
+}
+
+.chat__header {
+  padding: 0 20px;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  height: 10%;
+}
+
+.chat__messages {
+  padding: 20px;
+  position: relative;
+  overflow-y: scroll;
+  height: 75%;
+}
+
+.chat__messages::-webkit-scrollbar {
+  display: none;
+}
+
+.chat__fieldBlock {
+  padding: 10px 20px;
+  overflow: hidden;
+  height: 15%;
+  border-top: 1px solid #eee;
+}
+
+.chat .profileImg {
+  height: 40px;
+  width: 40px;
+  background: url("../img/unnamed.svg") no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border: 2px solid #566181;
+  border-radius: 100%;
+  float: left;
+}
+
+.chat .profileImg, .chat .fieldSend, .chat .hisName {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.chat .headerProfile {
+  float: left;
+  height: 100%;
+}
+
+.chat .hisName {
+  font-weight: 800;
+  padding: 0 15px;
+  font-size: 18px;
+  display: inline-block;
+}
+
+.chat .profileCountry {
+  font-weight: 100;
+  font-size: 10px;
+}
+
+.chat .messageFlow {
+  overflow: auto;
+}
+
+.chat .messageFromWrap, .chat .messageToWrap {
+  width: 100%;
+}
+
+.chat .fieldProfile, .chat .fieldMessage, .chat .fieldSend, .chat .fieldForm {
+  height: 100%;
+}
+
+.chat .fieldProfile {
+  padding: 0 13px 0 10px;
+  float: left;
+}
+
+.chat .fieldMessage {
+  padding: 0 10px;
+  float: left;
+  width: 81%;
+}
+
+.chat .fieldSend {
+  float: right;
+  height: auto;
+}
+
+.chat .messageArea {
+  resize: none;
+  font-size: 14px;
+  border: 1px solid #eee;
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+.home {
+  text-align: center;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.home .logo {
+  width: 550px;
+  z-index: 4;
+}
+
+.home .content {
+  padding: 15px 0 0 0;
+}
+
+.home .messageTo, .home .messageFrom {
+  margin: 50px 0 0 0;
+  z-index: 1;
+}
+
+.home .messageText {
+  font-size: 20px;
+}
+
+.home__name {
+  margin: 0;
+  font-weight: 200;
+  font-size: 45px;
+}
+
+.home__description {
+  font-weight: 200;
+}
+
+.home__tagline {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.home .defaultBtn {
+  margin: 10px 0 0 0;
+}
+
+.mainCard {
+  padding: 50px;
+  margin: 25px auto;
+  width: 600px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
+  -webkit-animation-name: fadeInUp;
+          animation-name: fadeInUp;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+.userPhoto {
+  margin: 0 auto;
+  height: 100px;
+  width: 100px;
+  background: url("../img/unnamed.svg") no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border: 5px solid #566181;
+  border-radius: 100%;
+}
+
+.hide {
+  display: none;
+}

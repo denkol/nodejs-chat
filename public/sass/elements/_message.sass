@@ -1,0 +1,66 @@
+//Message
+.messageTo, .messageFrom
+  height: auto
+  width: auto
+  max-width: 80%
+  text-align: left
+  padding: 20px 
+
+.messageTo
+  float: left
+  background-color: $light-color
+  border-top-left-radius: 0
+  border-top-right-radius: 20px
+  border-bottom-right-radius: 20px
+  border-bottom-left-radius: 20px
+  color: $dark-color
+
+.messageFrom
+  float: right
+  background-color: $dark-color
+  border-top-left-radius: 20px
+  border-top-right-radius: 0 
+  border-bottom-right-radius: 20px
+  border-bottom-left-radius: 20px
+  color: $light-color
+
+.messageMeta
+  margin: 10px 0 0 0
+  display: block
+  font-size: 14px
+  opacity: 0.3
+
+.messageText
+  word-wrap: break-word
+  margin: 0
+  padding: 0
+    
+.messageSender
+  margin: 0 0 10px 0
+  color: $dark-color
+  font-size: 18px
+  font-weight: bold
+
+.messageToWrap, .messageFromWrap
+  overflow: hidden
+  margin: 0 0 15px 0 //Need fix
+  animation:
+    name: fadeInUp
+    delay: 0s
+    duration: 0.2s
+    fill-mode: both
+
+.messageToWrap
+  .messageSender
+    text-align: left
+
+.messageFromWrap
+  .messageSender
+    text-align: right
+
+.noMessages
+  color: #eee
+  position: relative
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%) 

@@ -1,0 +1,18 @@
+.defaultBtn
+  height: 50px
+  width: 120px
+  text-align: center
+  background-color: $dark-color
+  color: #FFFFFF
+  text-transform: uppercase
+  border-radius: 8px
+
+  +interaction(background-color, lighten($dark-color, 10%))
+  
+
+.sendBtn
+  text-transform: uppercase
+  color: $dark-color
+  background: transparent
+  padding: 0
+  +interaction(opacity, 0.5)

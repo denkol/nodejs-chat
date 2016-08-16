@@ -1,0 +1,51 @@
+//Login form
+
+.loginForm
+  width: 300px
+  margin: 0 auto 50px
+  &__item
+    text-align: left
+    margin: 25px 0
+  label
+    color: $dark-color
+    font-weight: 100
+    font-size: 20px
+    display: block
+    margin: 0 0 10px 0
+  input
+    color: $dark-color
+    width: 100%
+    padding: 10px
+    border-radius: 8px
+    border: 2px solid lighten($dark-color, 40%)
+    transition: 0.2s
+    &:hover
+      border: 2px solid lighten($dark-color, 20%)
+    &:focus
+      border: 2px solid lighten($dark-color, 0%)
+  select
+    background-color: transparent
+    border-radius: 8px
+    border: 2px solid lighten($dark-color, 40%)
+    width: 100%
+    text-indent: 9.01px
+    color: $dark-color
+    -webkit-appearance: none
+    transition: 0.2s
+    height: 40px
+    &:after
+      content: ""
+      position: relative
+      width: 0
+      height: 0
+      border-style: solid
+      border-width: 100px 100px 0 100px
+      border-color: $dark-color transparent transparent transparent
+      right: 10px
+    &:hover
+      border: 2px solid lighten($dark-color, 20%)
+    &:focus
+      border: 2px solid lighten($dark-color, 0%)
+
+  .inputError
+    border: 2px solid orange

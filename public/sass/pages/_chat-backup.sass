@@ -1,0 +1,119 @@
+//Chat page 
+$chat-header-height: 50px
+$chat-mainCard-height: 780px
+$chat-fieldBlock-height: 100px
+$chat-messages-height: $chat-mainCard-height - ($chat-header-height + $chat-fieldBlock-height)
+
+$chat-avatar-size: 35px
+
+.chat
+  text-align: center
+  
+  .mainCard
+    padding: 0
+    height: $chat-mainCard-height
+  
+  &__header
+    position: relative
+    border-bottom: 1px solid #eee
+    height: $chat-header-height
+    width: 100%
+  
+  &__messages
+    overflow-y: scroll
+    padding: 20px
+    height: $chat-messages-height
+
+  &__fieldBlock
+    padding: 0 20px
+    overflow: hidden //Clearfix
+    height: $chat-fieldBlock-height
+    border-top: 1px solid #eee
+
+
+  .profileImg
+    height: $chat-avatar-size
+    width: $chat-avatar-size
+    background: url("../img/unnamed.svg") no-repeat
+    background-position: center center
+    background-size: cover
+    border: 2px solid $dark-color
+    border-radius: 100%
+  
+
+  //chat__header
+
+  .headerProfile
+    padding: 0 0 0 20px
+    display: inline-block
+    height: 100%
+    float: left
+    font-size: 25px
+    font-weight: 400  
+  
+    .profileImg
+      display: inline-block
+      margin-top: ($chat-header-height - $chat-avatar-size) / 2
+      margin-bottom: ($chat-header-height - $chat-avatar-size) / 2
+      float: left
+    
+    .profileName
+      height: 100%
+      font-weight: 800
+      margin: 0 0 0 15px
+      font-size: 18px
+      display: inline-block
+      line-height: 60px
+
+    .profileCountry
+      font-weight: 100
+      font-size: 10px  
+  
+
+  //chat__message
+  .messageFlow
+    overflow: auto
+
+  .messageFromWrap, .messageToWrap
+    width: 100%
+  
+
+  //chat__fieldBlock
+  .fieldForm
+    height: 100%
+
+  .fieldProfile, .fieldMessage, .fieldSend
+    display: inline-block
+    height: 100%
+    
+  .fieldProfile
+    padding-left: 20px
+    float: left
+    padding: ($chat-fieldBlock-height - 45px) / 2 10px ($chat-fieldBlock-height - 45px) / 2 0
+
+  .fieldMessage
+    padding: 10px
+    float: left
+    width: 81%
+
+  .fieldSend
+    float: right
+    line-height: $chat-fieldBlock-height
+    padding: 0 0 10px 0
+    height: auto
+
+  .profileImg
+    display: inline-block
+    float: left
+
+  .messageArea
+    resize: none
+    font-size: 14px
+    border: 1px solid #eee
+    outline: none
+    padding: 10px
+    // border-radius: 5px
+    width: 100%
+    height: 100%
+  
+  
