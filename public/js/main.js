@@ -1,429 +1,423 @@
  // This file is executed in the browser, when people visit /chat/<random id>
 
-$(function(){
-	
-	//API Yandex.Translate 
-	var url = "https://translate.yandex.net/api/v1.5/tr.json/";
-	var key = "trnsl.1.1.20160706T224459Z.8bd4ccff283a1e4d.2530860c792d839a3b9d68a48cfcfe51155bac1b";
-	
-	//API's methods
-	var action = {
-  	translate : "translate",
-  	detect : "detect",
-  	getLangs : "getLangs" 
-	};
-	
-	//Параметры отправляемые в API Яндекс.Переводчик
-	var sendData = {
-  	"key" : key,
-	};
-	
-	//Язык системы или браузера 
-	var browserLang = navigator.language.split('-')[0];
-	
-	//Language when text be translated
-	var translateLang; 
-
-	// getting the id of the room from the url
-	var id = Number(window.location.pathname.match(/\/chat\/(\d+)$/)[1]);
-
-	// connect to the socket
-	var socket = io();
-	
-	// variables which hold the data for each person
-	var name = "",
-		email = "",
-		img = "",
-		friend = "";
-
-	// cache some jQuery objects
-	var section = $(".section"),
-		messagesWindow = $(".chat__messages"),
-		footer = $("footer");
-		
-	// states
-	var onConnect = $("#connected"),
-		inviteSomebody = $("#invite-textfield"),
-		personInside = $("#personinside"),
-		chatScreen = $("#chatscreen"),
-		left = $("#left"),
-		noMessages = $("#nomessages"),
-		tooManyPeople = $("#toomanypeople");
-
-	// some more jquery objects
-	var chatNickname = $(".nickname-chat"),
-		profileNickname = $(".profileName"),
-		profileCountry = $(".profileCountry"),
-		noMessages = $(".noMessages"),
-		leftNickname = $(".nickname-left"),
-		loginForm = $(".loginForm"),
-		yourName = $("#yourName"),
-		yourEmail = $("#yourEmail"),
-		yourLang = $("#yourSelect"),
-		hisName = $("#hisName"),
-		hisEmail = $("#hisEmail"),
-		hisLang = $("#hisSelect"),
-		chatForm = $("#chatform"),
-		textarea = $("#message"),
-		messageTimeSent = $(".timesent"),
-		chats = $(".messageFlow");
-
-	// these variables hold images
-	var ownerImage = $("#ownerImage"),
-		leftImage = $("#leftImage"),
-		noMessagesImage = $("#noMessagesImage");
-
-
-	// on connection to server get the id of person's room
-	socket.on('connect', function(){
-		socket.emit('load', id);
-	});
-
-	// save the gravatar url
-	socket.on('img', function(data){
-		img = data;
-	});
-
-	// receive the names and avatars of all people in the chat room
-	socket.on('peopleinchat', function(data){
-
-		if(data.number === 0){
-			
-			getLangs(yourLang); //Get language list from Yandex API
-			showMessage("connected");
-
-			loginForm.on('submit', function(e){
-
-				e.preventDefault();
-
-				name = $.trim(yourName.val());
-				
-				if(name.length < 1){
-					alert("Please enter a nick name longer than 1 character!");
-					return;
-				}
-				
-				lang = yourLang.val();
-				email = yourEmail.val();
+ $(function() {
+
+   // API Yandex.Translate 
+   var url = "https://translate.yandex.net/api/v1.5/tr.json/";
+   var key = "trnsl.1.1.20160706T224459Z.8bd4ccff283a1e4d.2530860c792d839a3b9d68a48cfcfe51155bac1b";
+
+   // API's methods
+   var action = {
+     translate: "translate",
+     detect: "detect",
+     getLangs: "getLangs"
+   };
+
+   // send data to API Yandex
+   var sendData = {
+     "key": key,
+   };
+
+   // browser languge
+   var browserLang = navigator.language.split('-')[0];
+
+   // language when text be translated
+   var translateLang;
+
+   // getting the id of the room from the url
+   var id = Number(window.location.pathname.match(/\/chat\/(\d+)$/)[1]);
+
+   // connect to the socket
+   var socket = io();
+
+   // variables which hold the data for each person
+   var name = "",
+     email = "",
+     img = "",
+     friend = "";
+
+   // cache some jQuery objects
+   var section = $(".section"),
+     messagesWindow = $(".chat__messages"),
+     footer = $("footer");
+
+   // states
+   var onConnect = $("#connected"),
+     inviteSomebody = $("#invite-textfield"),
+     personInside = $("#personinside"),
+     chatScreen = $("#chatscreen"),
+     left = $("#left"),
+     noMessages = $("#nomessages"),
+     tooManyPeople = $("#toomanypeople");
+
+   // some more jquery objects
+   var chatNickname = $(".nickname-chat"),
+     profileNickname = $(".profileName"),
+     profileCountry = $(".profileCountry"),
+     noMessages = $(".noMessages"),
+     leftNickname = $(".nickname-left"),
+     loginForm = $(".loginForm"),
+     yourName = $("#yourName"),
+     yourEmail = $("#yourEmail"),
+     yourLang = $("#yourSelect"),
+     hisName = $("#hisName"),
+     hisEmail = $("#hisEmail"),
+     hisLang = $("#hisSelect"),
+     chatForm = $("#chatform"),
+     textarea = $("#message"),
+     messageTimeSent = $(".timesent"),
+     chats = $(".messageFlow");
+
+   // these variables hold images
+   var ownerImage = $("#ownerImage"),
+     leftImage = $("#leftImage"),
+     noMessagesImage = $("#noMessagesImage");
+
+
+   // on connection to server get the id of person's room
+   socket.on('connect', function() {
+     socket.emit('load', id);
+   });
+
+   // save the gravatar url
+   socket.on('img', function(data) {
+     img = data;
+   });
+
+   // receive the names and avatars of all people in the chat room
+   socket.on('peopleinchat', function(data) {
+
+     if (data.number === 0) {
+
+       getLangs(yourLang); //Get language list from Yandex API
+       showMessage("connected");
+
+       loginForm.on('submit', function(e) {
+
+         e.preventDefault();
+
+         name = $.trim(yourName.val());
+
+         if (name.length < 1) {
+           alert("Please enter a nick name longer than 1 character!");
+           return;
+         }
 
-				if(!isValid(email)) {
-					alert("Please enter a valid email!");
-				}
-				
-				else {
+         lang = yourLang.val();
+         email = yourEmail.val();
 
-					showMessage("inviteSomebody");
+         if (!isValid(email)) {
+           alert("Please enter a valid email!");
+         } else {
 
-					// call the server-side function 'login' and send user's parameters
-					socket.emit('login', {user: name, avatar: email, lang: lang, id: id});
-				}
-			
-			});
-		}
+           showMessage("inviteSomebody");
 
-		else if(data.number === 1) {
+           // call the server-side function 'login' and send user's parameters
+           socket.emit('login', {
+             user: name,
+             avatar: email,
+             lang: lang,
+             id: id
+           });
+         }
 
-			getLangs(hisLang); //Get language list from Yandex API
-			
-			showMessage("personinchat", data);
+       });
+     } else if (data.number === 1) {
 
-			loginForm.on('submit', function(e){
+       getLangs(hisLang); //Get language list from Yandex API
 
-				e.preventDefault();
+       showMessage("personinchat", data);
 
-				name = $.trim(hisName.val());
+       loginForm.on('submit', function(e) {
 
-				if(name.length < 1){
-					alert("Please enter a nick name longer than 1 character!");
-					return;
-				}
+         e.preventDefault();
 
-				if(name == data.user){
-					alert("There already is a \"" + name + "\" in this room!");
-					return;
-				}
-				
-				lang = hisLang.val();
+         name = $.trim(hisName.val());
 
-				email = hisEmail.val();
+         if (name.length < 1) {
+           alert("Please enter a nick name longer than 1 character!");
+           return;
+         }
 
-				if(!isValid(email)){
-					alert("Wrong e-mail format!");
-				}
+         if (name == data.user) {
+           alert("There already is a \"" + name + "\" in this room!");
+           return;
+         }
 
-				else {
-					socket.emit('login', {user: name, avatar: email, lang: lang, id: id});
-				}
+         lang = hisLang.val();
 
-			});
-		}
+         email = hisEmail.val();
 
-		else {
-			showMessage("tooManyPeople");
-		}
+         if (!isValid(email)) {
+           alert("Wrong e-mail format!");
+         } else {
+           socket.emit('login', {
+             user: name,
+             avatar: email,
+             lang: lang,
+             id: id
+           });
+         }
 
-	});
+       });
+     } else {
+       showMessage("tooManyPeople");
+     }
 
-	// Other useful 
+   });
 
-	socket.on('startChat', function(data){
-		console.log(data);
-		if(data.boolean && data.id == id) {
+   // Other useful 
 
-			chats.empty();
+   socket.on('startChat', function(data) {
+     console.log(data);
+     if (data.boolean && data.id == id) {
 
-			if(name === data.users[0]) {
-				showMessage("youStartedChatWithNoMessages",data);
-			}
-			else {
-				showMessage("heStartedChatWithNoMessages",data);
-			}
+       chats.empty();
 
-			//Changing langs
-			if(data.langs.length >= 2) {
-				if(name === data.users[0]) {
-					translateLang = data.langs[0]+"-"+data.langs[1]; //1st
-				}else{
-					translateLang = data.langs[1]+"-"+data.langs[0]; //2st
-				}
-			}
+       if (name === data.users[0]) {
+         showMessage("youStartedChatWithNoMessages", data);
+       } else {
+         showMessage("heStartedChatWithNoMessages", data);
+       }
 
-			chatNickname.text(friend);
-		}
-	});
+       //Changing langs
+       if (data.langs.length >= 2) {
+         if (name === data.users[0]) {
+           translateLang = data.langs[0] + "-" + data.langs[1]; //1st
+         } else {
+           translateLang = data.langs[1] + "-" + data.langs[0]; //2st
+         }
+       }
 
-	socket.on('leave',function(data){
+       chatNickname.text(friend);
+     }
+   });
 
-		if(data.boolean && id==data.room){
+   socket.on('leave', function(data) {
 
-			showMessage("somebodyLeft", data);
-			chats.empty();
-		}
+     if (data.boolean && id == data.room) {
 
-	});
+       showMessage("somebodyLeft", data);
+       chats.empty();
+     }
 
-	socket.on('tooMany', function(data){
+   });
 
-		if(data.boolean && name.length === 0) {
+   socket.on('tooMany', function(data) {
 
-			showMessage('tooManyPeople');
-		}
-	});
+     if (data.boolean && name.length === 0) {
 
-	socket.on('receive', function(data){
+       showMessage('tooManyPeople');
+     }
+   });
 
-		showMessage('chatStarted');
+   socket.on('receive', function(data) {
 
-		if(data.msg.trim().length) {
-			createChatMessage(data.msg, data.user, data.img, moment());
-			scrollToBottom();
-		}
-	});
+     showMessage('chatStarted');
 
-	textarea.keypress(function(e){
+     if (data.msg.trim().length) {
+       createChatMessage(data.msg, data.user, data.img, moment());
+       scrollToBottom();
+     }
+   });
 
-		// Submit the form on enter
+   textarea.keypress(function(e) {
 
-		if(e.which == 13) {
-			e.preventDefault();
-			chatForm.trigger('submit');
-		}
+     // Submit the form on enter
 
-	});
+     if (e.which == 13) {
+       e.preventDefault();
+       chatForm.trigger('submit');
+     }
 
-	chatForm.on('submit', function(e){
+   });
 
-		e.preventDefault();
+   chatForm.on('submit', function(e) {
 
-		// Create a new chat message and display it directly
-		sendData.text = textarea.val(); //Сообщение 
-  	sendData.lang = translateLang; //Язык перевода
-		console.log("Translate: " + translateLang)
+     e.preventDefault();
 
-		//Send request to Yandex.API
-		$.getJSON(url + action.translate, sendData, function(responseData){
-    		
-    	//Save result
-    	var message = responseData.text.toString(); 
+     // create a new chat message and display it directly
+     sendData.text = textarea.val(); //Сообщение 
+     sendData.lang = translateLang; //Язык перевода
+     console.log("Translate: " + translateLang)
 
-    	showMessage("chatStarted");
+     // send request to Yandex.API
+     $.getJSON(url + action.translate, sendData, function(responseData) {
 
-			if(textarea.val().trim().length) {
-				createChatMessage(textarea.val(), name, img, moment());
-				scrollToBottom();
+       // save result
+       var message = responseData.text.toString();
 
-				// Send the message to the other person in the chat
-				socket.emit('msg', {msg: message, user: name, img: img});
+       showMessage("chatStarted");
 
-			}
-			// Empty the textarea
-			textarea.val("");
-  	});
-		
-	});
+       if (textarea.val().trim().length) {
+         createChatMessage(textarea.val(), name, img, moment());
+         scrollToBottom();
 
-	// Update the relative time stamps on the chat messages every minute
+         // Send the message to the other person in the chat
+         socket.emit('msg', {
+           msg: message,
+           user: name,
+           img: img
+         });
 
-	setInterval(function(){
+       }
+       // Empty the textarea
+       textarea.val("");
+     });
 
-		messageTimeSent.each(function(){
-			var each = moment($(this).data('time'));
-			$(this).text(each.fromNow());
-		});
+   });
 
-	},60000);
+   // update the relative time stamps on the chat messages every minute
 
-	// Function that creates a new chat message
+   setInterval(function() {
 
-	function createChatMessage(msg,user,imgg,now){
+     messageTimeSent.each(function() {
+       var each = moment($(this).data('time'));
+       $(this).text(each.fromNow());
+     });
 
-		var messageWrap = '', messageWho = '';
+   }, 60000);
 
-		if(user===name) {
-			messageWrap = 'messageToWrap';
-			messageWho = 'messageTo';
-		}
-		else {
-			messageWrap = 'messageFromWrap';
-			messageWho = 'messageFrom';
-		}
+   // function that creates a new chat message
 
-		var li = $(
-			'<div class=' + messageWrap + '>' +
-        '<h1 class="messageSender">' + user + '</h1>' +
-          '<li class=' + messageWho + '>' +
-            '<p class="messageText">' + msg + '</p>' +
-            '<span class="messageMeta">' + now + '</span>' +
-          '</li>' +
-      '</div>');
+   function createChatMessage(msg, user, imgg, now) {
 
-		chats.append(li);
+     var messageWrap = '',
+       messageWho = '';
 
-		messageTimeSent = $(".messageMeta");
-		messageTimeSent.last().text(now.fromNow());
-	}
+     if (user === name) {
+       messageWrap = 'messageToWrap';
+       messageWho = 'messageTo';
+     } else {
+       messageWrap = 'messageFromWrap';
+       messageWho = 'messageFrom';
+     }
 
-	function scrollToBottom(){
-		messagesWindow.animate({ scrollTop: messagesWindow[0].scrollHeight}, 1); 
-	}
+     var li = $(
+       '<div class=' + messageWrap + '>' +
+       '<h1 class="messageSender">' + user + '</h1>' +
+       '<li class=' + messageWho + '>' +
+       '<p class="messageText">' + msg + '</p>' +
+       '<span class="messageMeta">' + now + '</span>' +
+       '</li>' +
+       '</div>');
 
-	function isValid(thatemail) {
+     chats.append(li);
 
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		return re.test(thatemail);
-	}
+     messageTimeSent = $(".messageMeta");
+     messageTimeSent.last().text(now.fromNow());
+   }
 
-	function showMessage(status,data){
-		
-		console.log('Status:', status)
+   function scrollToBottom() {
+     messagesWindow.animate({
+       scrollTop: messagesWindow[0].scrollHeight
+     }, 1);
+   }
 
-		if(status === "connected"){
-			
-			titleChange('Create room - Translator');
+   function isValid(thatemail) {
 
-			section.children().addClass('hide');
-			onConnect.removeClass('hide');
-			
-		}
+     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+     return re.test(thatemail);
+   }
 
-		else if(status === "inviteSomebody"){
-			
-			titleChange('Invite somebody - Translator');
+   function showMessage(status, data) {
 
-			section.children().addClass('hide');
-			inviteSomebody.removeClass('hide');
+     console.log('Status:', status)
 
-			// Set the invite link content
-			$("#link").text(window.location.href);
-				
-		}
+     if (status === "connected") {
 
-		else if(status === "personinchat"){
+       titleChange('Create room - Translator');
 
-			titleChange('Join to ' + data.user + ' - Translator');
+       section.children().addClass('hide');
+       onConnect.removeClass('hide');
 
-			section.children().addClass('hide');
-			personInside.removeClass('hide');
+     } else if (status === "inviteSomebody") {
 
-			chatNickname.text(data.user);
-			// ownerImage.attr("src",data.avatar);
-		}
+       titleChange('Invite somebody - Translator');
 
-		else if(status === "youStartedChatWithNoMessages") {
+       section.children().addClass('hide');
+       inviteSomebody.removeClass('hide');
 
-			titleChange('Chat with ' + data.users[1] + ' - Translator');
+       // set the invite link content
+       $("#link").text(window.location.href);
 
-			section.children().addClass('hide');
-			chatScreen.removeClass('hide');
+     } else if (status === "personinchat") {
 
-			profileNickname.text(data.users[1]);
-		}
+       titleChange('Join to ' + data.user + ' - Translator');
 
-		else if(status === "heStartedChatWithNoMessages") {
+       section.children().addClass('hide');
+       personInside.removeClass('hide');
 
-			titleChange('Chat with ' + data.users[0] + ' - Translator');
+       chatNickname.text(data.user);
+       // ownerImage.attr("src",data.avatar);
+     } else if (status === "youStartedChatWithNoMessages") {
 
-			section.children().addClass('hide');
-			chatScreen.removeClass('hide');
+       titleChange('Chat with ' + data.users[1] + ' - Translator');
 
-			profileNickname.text(data.users[0]);
-		}
+       section.children().addClass('hide');
+       chatScreen.removeClass('hide');
 
-		else if(status === "chatStarted"){
-			section.children().addClass('hide');
-			noMessages.addClass('hide');
-			chatScreen.removeClass('hide');
-		}
+       profileNickname.text(data.users[1]);
 
-		else if(status === "somebodyLeft"){
-			
-			titleChange('Somebody left - Translator');
+     } else if (status === "heStartedChatWithNoMessages") {
 
-			section.children().addClass('hide');
-			left.removeClass('hide');
+       titleChange('Chat with ' + data.users[0] + ' - Translator');
 
-			leftImage.attr("src",data.avatar);
-			leftNickname.text(data.user);
+       section.children().addClass('hide');
+       chatScreen.removeClass('hide');
 
-		}
+       profileNickname.text(data.users[0]);
+     } else if (status === "chatStarted") {
+       section.children().addClass('hide');
+       noMessages.addClass('hide');
+       chatScreen.removeClass('hide');
+     } else if (status === "somebodyLeft") {
 
-		else if(status === "tooManyPeople") {
-			titleChange('To many people - Translator');
+       titleChange('Somebody left - Translator');
 
-			section.children().addClass('hide');
-			tooManyPeople.removeClass('hide');
-		}
+       section.children().addClass('hide');
+       left.removeClass('hide');
 
-	}
-	
-	function getLangs(select) {
+       leftImage.attr("src", data.avatar);
+       leftNickname.text(data.user);
 
-		//Add lang to send params
-		sendData.ui = browserLang;
-		
-		//Request to API 
-		$.getJSON(url + action.getLangs, sendData, function(response) {
-			var langs = response.langs;
-			
-			if (langs) {
-				$.each(langs, function(key, value) {
-    			select.append('<option value=' + key + '>' + value + '</option>');
-				});
-				select.val(browserLang); //Set default lang
-				select.prop('disabled', false); //Enable <select>
-			} else {
-				select.prop('disabled', true); //Disable <select>	
-				console.warn('Lang <select> inactive, because network unavaible. ');
-			}
-		
-		});
-		
-		//Remove lang from send params when function end
-		delete sendData.ui;
-	}
+     } else if (status === "tooManyPeople") {
+       titleChange('To many people - Translator');
 
-	function titleChange(title) {
-		document.title = title;
-	}
+       section.children().addClass('hide');
+       tooManyPeople.removeClass('hide');
+     }
 
-});
+   }
+
+   function getLangs(select) {
+
+     // add lang to send params
+     sendData.ui = browserLang;
+
+     // request to API 
+     $.getJSON(url + action.getLangs, sendData, function(response) {
+       var langs = response.langs;
+
+       if (langs) {
+         $.each(langs, function(key, value) {
+           select.append('<option value=' + key + '>' + value + '</option>');
+         });
+         select.val(browserLang); // set default lang
+         select.prop('disabled', false); // enable <select>
+       } else {
+         select.prop('disabled', true); // disable <select>	
+         console.warn('Lang <select> inactive, because network unavaible. ');
+       }
+
+     });
+
+     // remove lang from send params when function end
+     delete sendData.ui;
+   }
+
+   function titleChange(title) {
+     document.title = title;
+   }
+
+ });

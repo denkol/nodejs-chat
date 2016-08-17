@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Translator - Feedback</title>
   <meta charset="uft-8">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.min.css">
   <!-- <link rel="stylesheet" href="css/style.min.css"> -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
   <!--Favicons-->
@@ -16,35 +17,36 @@
   <link rel="apple-touch-icon" sizes="144x144" href="img/favicons/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="img/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicons/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="img/favicons/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
   <link rel="manifest" href="img/favicons/manifest.json">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="img/favicons/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#ffffff"> 
 </head>
+
 <body>
   <div class="wrapper">
     <style>
-      body {
-        background: url(../img/discusBg.png);
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position-x: -200px;
-        color: #566181;
-        background-color: #ffffff;
-      }
-      .disqusWraper{
-        width: 50%;
-        margin: 0 auto;
-      }
+    body {
+      background: url(../img/discusBg.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position-x: -200px;
+      color: #566181;
+      background-color: #ffffff;
+    }
+    
+    .disqusWraper {
+      width: 50%;
+      margin: 0 auto;
+    }
     </style>
     <div class="disqusWraper">
       <div id="disqus_thread"></div>
       <script>
-
       /**
        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
@@ -55,13 +57,16 @@
       };
       */
       (function() { // DON'T EDIT BELOW THIS LINE
-          var d = document, s = d.createElement('script');
-          s.src = '//tranlator.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
+        var d = document,
+          s = d.createElement('script');
+        s.src = '//tranlator.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
       })();
       </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <noscript>Please enable JavaScript to view the
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+      </noscript>
     </div>
   </div>
   <footer>
@@ -77,4 +82,5 @@
     </div>
   </footer>
 </body>
+
 </html>
