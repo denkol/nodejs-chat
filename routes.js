@@ -37,6 +37,12 @@ module.exports = function(app,io){
 		res.render('chat');
 	});
 
+	app.get('/feedback', function(req,res){
+		
+		// Redirect to the discussion page
+		res.render('feedback');
+	});
+
 	// Initialize a new socket.io application, named 'chat'
 	var chat = io.on('connection', function (socket) {
 
