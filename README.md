@@ -1,11 +1,11 @@
 # Translator
-###### Simple messaging application that breaks the language barrier
+Simple messaging application that breaks the language barrier
 
 Real-time NodeJS chat aplication build with socket.io and Express.
 
 Demo: http://vm19889.hv8.ru/
 
-### Install for demo
+## Install for demo
 First clone repository
 ```
 git clone https://github.com/denkol/translator.git
@@ -13,6 +13,8 @@ git clone https://github.com/denkol/translator.git
 Move to repository folder and download all dependences from npm
 ```
 cd translator
+```
+```
 npm install --production
 ```
 Start aplication
@@ -24,7 +26,7 @@ Open in browser
 http://localhost:8080
 ```
 
-### Install for development
+## Install for development
 Clone repository
 ```
 git clone https://github.com/denkol/translator.git
@@ -32,6 +34,8 @@ git clone https://github.com/denkol/translator.git
 Move to repository folder and download all dependences from npm
 ```
 cd translator
+```
+```
 npm install
 ```
 Start gulp
