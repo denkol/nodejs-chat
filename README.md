@@ -4,6 +4,8 @@ Simple messaging application that breaks the language barrier
 Real-time NodeJS chat aplication build with socket.io and Express.
 
 [DEMO](http://vm19889.hv8.ru/)
+Discussion on [gitter.io](https://gitter.im/translator-project/Lobby)
+
 
 ## Install for demo
 First clone repository
