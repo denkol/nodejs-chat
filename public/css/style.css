@@ -348,7 +348,11 @@ input, select {
   min-height: 100%;
   position: relative;
   margin: 0 auto -120px;
-  padding-top: 20px;
+  padding: 20px 0 200px 0;
+}
+
+.section {
+  padding-top: 25px;
 }
 
 @-webkit-keyframes logoLoading {
@@ -418,6 +422,7 @@ input, select {
 }
 
 footer {
+  display: block;
   font-weight: 100;
   position: relative;
   bottom: 0;
@@ -606,7 +611,7 @@ footer {
   width: auto;
   max-width: 80%;
   text-align: left;
-  padding: 20px;
+  padding: 18px;
 }
 
 .messageTo {
@@ -632,12 +637,13 @@ footer {
 .messageMeta {
   margin: 10px 0 0 0;
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.3;
 }
 
 .messageText {
   word-wrap: break-word;
+  font-size: 15px;
   margin: 0;
   padding: 0;
 }
@@ -804,6 +810,7 @@ footer {
 .chat .mainCard {
   padding: 0;
   height: 650px;
+  width: 550px;
 }
 
 .chat__header {
@@ -825,7 +832,6 @@ footer {
 }
 
 .chat__fieldBlock {
-  padding: 10px 20px;
   overflow: hidden;
   height: 15%;
   border-top: 1px solid #eee;
@@ -842,7 +848,7 @@ footer {
   float: left;
 }
 
-.chat .profileImg, .chat .fieldSend, .chat .hisName {
+.chat .profileImg, .chat .sendBtn, .chat .hisName {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -861,11 +867,6 @@ footer {
   display: inline-block;
 }
 
-.chat .profileCountry {
-  font-weight: 100;
-  font-size: 10px;
-}
-
 .chat .messageFlow {
   overflow: auto;
 }
@@ -879,24 +880,24 @@ footer {
 }
 
 .chat .fieldProfile {
-  padding: 0 13px 0 10px;
+  padding: 0 7.5px 0 15px;
   float: left;
 }
 
 .chat .fieldMessage {
-  padding: 0 10px;
+  padding: 10px 7.5px;
   float: left;
-  width: 81%;
+  width: 77%;
 }
 
 .chat .fieldSend {
+  padding: 0 15px 0 7.5px;
   float: right;
-  height: auto;
 }
 
 .chat .messageArea {
   resize: none;
-  font-size: 14px;
+  font-size: 15px;
   border: 1px solid #eee;
   outline: none;
   padding: 10px;
@@ -952,9 +953,31 @@ footer {
   margin: 10px 0 0 0;
 }
 
+.home .messageTo {
+  -webkit-animation-name: fadeInUp;
+          animation-name: fadeInUp;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+.home .messageFrom {
+  -webkit-animation-name: fadeInUp;
+          animation-name: fadeInUp;
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
 .mainCard {
   padding: 50px;
-  margin: 25px auto;
+  margin: 0 auto;
   width: 600px;
   background-color: #FFFFFF;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);

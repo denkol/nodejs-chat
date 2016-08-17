@@ -12,6 +12,7 @@ $chat-avatar-size: 40px
   .mainCard
     padding: 0
     height: $chat-mainCard-height
+    width: $chat-mainCard-height - 100px
   
   &__header
     padding: 0 20px
@@ -28,7 +29,6 @@ $chat-avatar-size: 40px
       display: none
     
   &__fieldBlock
-    padding: 10px 20px
     overflow: hidden //Clearfix
     height: $chat-fieldBlock-height
     border-top: 1px solid #eee
@@ -43,7 +43,7 @@ $chat-avatar-size: 40px
     border-radius: 100%
     float: left
   
-  .profileImg, .fieldSend, .hisName //Vertical centering elements
+  .profileImg, .sendBtn, .hisName //Vertical centering elements
     position: relative
     top: 50%
     transform: translateY(-50%)
@@ -58,10 +58,7 @@ $chat-avatar-size: 40px
     padding: 0 15px
     font-size: 18px
     display: inline-block
-    
-  .profileCountry
-    font-weight: 100
-    font-size: 10px  
+  
   
 
   //chat__message
@@ -75,23 +72,25 @@ $chat-avatar-size: 40px
   //chat__fieldBlock
   .fieldProfile, .fieldMessage, .fieldSend, .fieldForm
     height: 100%
-    
+  
+  $paddingField: 15px
+  
   .fieldProfile
-    padding: 0 13px 0 10px 
+    padding: 0 $paddingField/2 0 $paddingField
     float: left
 
   .fieldMessage
-    padding: 0 10px
+    padding: 10px $paddingField/2
     float: left
-    width: 81%
+    width: 77%
 
   .fieldSend
+    padding: 0 $paddingField 0 $paddingField/2
     float: right
-    height: auto
 
   .messageArea
     resize: none
-    font-size: 14px
+    font-size: $messageFontSize
     border: 1px solid #eee
     outline: none
     padding: 10px

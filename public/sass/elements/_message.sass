@@ -1,10 +1,15 @@
 //Message
+
+$messageFontSize: 15px
+$metaFontSize: 13px
+$senderFontSize: 18px
+
 .messageTo, .messageFrom
   height: auto
   width: auto
   max-width: 80%
   text-align: left
-  padding: 20px 
+  padding: 18px 
 
 .messageTo
   float: left
@@ -27,19 +32,21 @@
 .messageMeta
   margin: 10px 0 0 0
   display: block
-  font-size: 14px
+  font-size: $metaFontSize
   opacity: 0.3
 
 .messageText
   word-wrap: break-word
+  font-size: $messageFontSize
   margin: 0
   padding: 0
     
 .messageSender
   margin: 0 0 10px 0
   color: $dark-color
-  font-size: 18px
+  font-size: $senderFontSize
   font-weight: bold
+
 
 .messageToWrap, .messageFromWrap
   overflow: hidden
@@ -64,3 +71,5 @@
   top: 50%
   left: 50%
   transform: translate(-50%, -50%) 
+
+

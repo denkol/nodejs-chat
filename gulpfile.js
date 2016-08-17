@@ -64,7 +64,7 @@ gulp.task('scripts', function(){
     .pipe(gulp.dest(baseDir + '/js/'))
     .pipe(uglify())
     .pipe(gulp.dest(baseDir + '/js/'))
-});
+}); 
 
 gulp.task('default', function(){
   gulp.watch(baseDir + "/sass/**/*.sass", ['styles']);
