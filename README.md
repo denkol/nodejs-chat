@@ -3,7 +3,7 @@ Simple messaging application that breaks the language barrier
 
 Real-time NodeJS chat aplication build with socket.io and Express.
 
-Demo: http://vm19889.hv8.ru/
+[DEMO](http://vm19889.hv8.ru/)
 
 ## Install for demo
 First clone repository
