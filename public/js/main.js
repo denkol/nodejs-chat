@@ -33,7 +33,7 @@
    // variables which hold the data for each person
    var name = "",
      email = "",
-     img = "",
+     // img = "",
      friend = "";
 
    // cache some jQuery objects
@@ -80,9 +80,9 @@
    });
 
    // save the gravatar url
-   socket.on('img', function(data) {
-     img = data;
-   });
+   // socket.on('img', function(data) {
+   //   img = data;
+   // });
 
    // receive the names and avatars of all people in the chat room
    socket.on('peopleinchat', function(data) {
@@ -115,7 +115,7 @@
            // call the server-side function 'login' and send user's parameters
            socket.emit('login', {
              user: name,
-             avatar: email,
+             // avatar: email,
              lang: lang,
              id: id
            });
@@ -153,7 +153,7 @@
          } else {
            socket.emit('login', {
              user: name,
-             avatar: email,
+             // avatar: email,
              lang: lang,
              id: id
            });
@@ -216,7 +216,8 @@
      showMessage('chatStarted');
 
      if (data.msg.trim().length) {
-       createChatMessage(data.msg, data.user, data.img, moment());
+       // createChatMessage(data.msg, data.user, data.img, moment());
+       createChatMessage(data.msg, data.user, moment());
        scrollToBottom();
      }
    });
@@ -250,14 +251,15 @@
        showMessage("chatStarted");
 
        if (textarea.val().trim().length) {
-         createChatMessage(textarea.val(), name, img, moment());
+         // createChatMessage(textarea.val(), name, img, moment());
+         createChatMessage(textarea.val(), name, moment());
          scrollToBottom();
 
          // Send the message to the other person in the chat
          socket.emit('msg', {
            msg: message,
-           user: name,
-           img: img
+           user: name
+           // img: img
          });
 
        }
@@ -280,7 +282,8 @@
 
    // function that creates a new chat message
 
-   function createChatMessage(msg, user, imgg, now) {
+   // function createChatMessage(msg, user, imgg, now) {
+    function createChatMessage(msg, user, now) {
 
      var messageWrap = '',
        messageWho = '';
@@ -378,7 +381,7 @@
        section.children().addClass('hide');
        left.removeClass('hide');
 
-       leftImage.attr("src", data.avatar);
+       // leftImage.attr("src", data.avatar);
        leftNickname.text(data.user);
 
      } else if (status === "tooManyPeople") {

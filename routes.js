@@ -3,7 +3,7 @@
 // and listens for socket.io messages.
 
 // Use the gravatar module, to turn email addresses into avatar images:
-var gravatar = require('gravatar');
+// var gravatar = require('gravatar');
 
 //Logs module
 var log4js = require('log4js');
@@ -62,7 +62,7 @@ module.exports = function(app, io) {
         socket.emit('peopleinchat', {
           number: 1,
           user: room[0].username,
-          avatar: room[0].avatar,
+          // avatar: room[0].avatar,
           id: data
         });
       } else if (room.length >= 2) {
@@ -86,14 +86,14 @@ module.exports = function(app, io) {
         socket.lang = data.lang;
         socket.username = data.user;
         socket.room = data.id;
-        socket.avatar = gravatar.url(data.avatar, {
-          s: '140',
-          r: 'x',
-          d: 'mm'
-        });
+        // socket.avatar = gravatar.url(data.avatar, {
+        //   s: '140',
+        //   r: 'x',
+        //   d: 'mm'
+        // });
 
         // Tell the person what he should use for an avatar
-        socket.emit('img', socket.avatar);
+        // socket.emit('img', socket.avatar);
 
 
         // Add the client to the room
@@ -102,8 +102,8 @@ module.exports = function(app, io) {
         if (room.length == 1) {
 
           var usernames = [],
-            langs = [],
-            avatars = [];
+            langs = [];
+            // avatars = [];
 
           usernames.push(room[0].username);
           usernames.push(socket.username);
@@ -111,8 +111,8 @@ module.exports = function(app, io) {
           langs.push(room[0].lang);
           langs.push(socket.lang);
 
-          avatars.push(room[0].avatar);
-          avatars.push(socket.avatar);
+          // avatars.push(room[0].avatar);
+          // avatars.push(socket.avatar);
 
           // Send the startChat event to all the people in the
           // room, along with a list of people that are in it.
@@ -122,7 +122,7 @@ module.exports = function(app, io) {
             id: data.id,
             users: usernames,
             langs: langs,
-            avatars: avatars
+            // avatars: avatars
           });
         }
       } else {
@@ -146,7 +146,7 @@ module.exports = function(app, io) {
         boolean: true,
         room: this.room,
         user: this.username,
-        avatar: this.avatar
+        // avatar: this.avatar
       });
 
       // leave the room
@@ -161,7 +161,7 @@ module.exports = function(app, io) {
       socket.broadcast.to(socket.room).emit('receive', {
         msg: data.msg,
         user: data.user,
-        img: data.img
+        // img: data.img
       });
     });
   });
