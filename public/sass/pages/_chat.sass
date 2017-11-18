@@ -1,6 +1,7 @@
 //Chat page 
 $chat-header-height: 10%
 $chat-mainCard-height: 650px
+$chat-mainCard-width: $chat-mainCard-height - 100px
 $chat-fieldBlock-height: 15%
 $chat-messages-height: 100% - ($chat-header-height + $chat-fieldBlock-height)
 
@@ -12,12 +13,13 @@ $chat-avatar-size: 40px
   .mainCard
     padding: 0
     height: $chat-mainCard-height
-    width: $chat-mainCard-height - 100px
+    width: $chat-mainCard-width
   
   &__header
     padding: 0 20px
     border-bottom: 1px solid #eee    
     width: 100%
+    flex-grow: 1
     height: $chat-header-height  
 
   &__messages
@@ -25,6 +27,7 @@ $chat-avatar-size: 40px
     position: relative
     overflow-y: scroll
     height: $chat-messages-height
+    flex-grow: 2
     &::-webkit-scrollbar  //Hide scrollbar
       display: none
     
@@ -32,6 +35,7 @@ $chat-avatar-size: 40px
     overflow: hidden //Clearfix
     height: $chat-fieldBlock-height
     border-top: 1px solid #eee
+    flex-grow: 1
 
   .profileImg
     height: $chat-avatar-size
