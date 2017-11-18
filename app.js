@@ -16,10 +16,10 @@ var port = process.env.PORT || 8080;
 
 var io = require('socket.io').listen(app.listen(port));
 
-// Require the configuration and the routes files, and pass
+// Require the configuration routes and the chat files, and pass
 // the app and io as arguments to the returned functions.
-
-require('./config')(app, io);
-require('./routes')(app, io);
+require('./config')(app);
+require('./routes')(app);
+require('./chat')(io);
 
 console.log('Translator is running on http://localhost:' + port);
