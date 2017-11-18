@@ -1,0 +1,51 @@
+//Variables
+@import variables
+
+//Other
+@import other/mixins
+@import other/normalize
+@import other/base
+@import other/keyframes
+
+//Blocks
+@import blocks/footer
+
+//Elements
+@import elements/buttons
+@import elements/logo
+@import elements/form
+@import elements/message
+
+//Pages
+@import pages/register
+@import pages/invite
+@import pages/chat
+@import pages/home
+
+.mainCard
+  padding: 50px
+  margin: 0 auto
+  width: 600px
+  background-color: #FFFFFF
+  box-shadow: 0 2px 7px rgba(0,0,0,0.2)
+  animation:
+    name: fadeInUp
+    duration: 1s
+    delay: 0s
+    fill-mode: both
+  
+.userPhoto
+  margin: 0 auto
+  height: 100px
+  width: 100px
+  background: url("../img/unnamed.svg") no-repeat
+  background-position: center center
+  background-size: cover
+  border: 5px solid $dark-color
+  border-radius: 100%
+
+.hide 
+  display: none
+
+//Responsive layout
+@import other/responsive

@@ -1,0 +1,74 @@
+//Share page
+
+.invite
+  text-align: center
+
+  .twoUserPhoto
+    & > * 
+      display: inline-block
+      margin: 0 10px
+  
+    margin: 0 0 20px 0
+
+  &__description, &__link, &__share
+    margin: 35px auto
+
+  &__description
+    font-size: 22px
+    font-weight: 200
+    color: $dark-color
+    text-align: center
+
+  &__link
+    padding: 10px 15px
+    background-color: lighten($light-color, 5%)
+    color: $dark-color
+    border-radius: 10px
+    font-weight: 100
+    font-size: 24px
+    text-align: center
+    // border: 3px dashed lighten($dark-color, 10%)
+    a 
+      text-decoration: none
+      color: $dark-color
+
+  &__share
+    .share__header
+      color: lighten($dark-color, 30%)
+    .share__icons
+      & > *
+        color: $dark-color
+        display: inline-block
+        margin: 0 10px
+        font-size: 25px
+        +interaction(opacity, 0.5)
+
+.moreIcon
+  vertical-align: top
+  height: 100px
+  width: 100px
+
+  svg
+    position: relative
+    top: 50%
+    margin-top: -25px
+    width: 50px
+    fill: $dark-color
+
+  //Animation connect with people
+  @for $i from 1 through 3 
+    .dot#{$i}
+      animation: fadeOut
+        delay: (500ms + ($i*100))
+        timing-function: ease
+        duration: 1.5s
+        iteration-count: infinite
+  
+
+
+
+
+
+
+
+

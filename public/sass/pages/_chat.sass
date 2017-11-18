@@ -1,0 +1,99 @@
+//Chat page 
+$chat-header-height: 10%
+$chat-mainCard-height: 650px
+$chat-fieldBlock-height: 15%
+$chat-messages-height: 100% - ($chat-header-height + $chat-fieldBlock-height)
+
+$chat-avatar-size: 40px
+
+.chat
+  text-align: center
+  
+  .mainCard
+    padding: 0
+    height: $chat-mainCard-height
+    width: $chat-mainCard-height - 100px
+  
+  &__header
+    padding: 0 20px
+    border-bottom: 1px solid #eee    
+    width: 100%
+    height: $chat-header-height  
+
+  &__messages
+    padding: 20px
+    position: relative
+    overflow-y: scroll
+    height: $chat-messages-height
+    &::-webkit-scrollbar  //Hide scrollbar
+      display: none
+    
+  &__fieldBlock
+    overflow: hidden //Clearfix
+    height: $chat-fieldBlock-height
+    border-top: 1px solid #eee
+
+  .profileImg
+    height: $chat-avatar-size
+    width: $chat-avatar-size
+    background: url("../img/unnamed.svg") no-repeat
+    background-position: center center
+    background-size: cover
+    border: 2px solid $dark-color
+    border-radius: 100%
+    float: left
+  
+  .profileImg, .sendBtn, .hisName //Vertical centering elements
+    position: relative
+    top: 50%
+    transform: translateY(-50%)
+    
+  //chat__header
+  .headerProfile
+    float: left
+    height: 100%
+    
+  .hisName
+    font-weight: 800
+    padding: 0 15px
+    font-size: 18px
+    display: inline-block
+  
+  
+
+  //chat__message
+  .messageFlow
+    overflow: auto
+
+  .messageFromWrap, .messageToWrap
+    width: 100%
+  
+
+  //chat__fieldBlock
+  .fieldProfile, .fieldMessage, .fieldSend, .fieldForm
+    height: 100%
+  
+  $paddingField: 15px
+  
+  .fieldProfile
+    padding: 0 $paddingField/2 0 $paddingField
+    float: left
+
+  .fieldMessage
+    padding: 10px $paddingField/2
+    float: left
+    width: 77%
+
+  .fieldSend
+    padding: 0 $paddingField 0 $paddingField/2
+    float: right
+
+  .messageArea
+    resize: none
+    font-size: $messageFontSize
+    border: 1px solid #eee
+    outline: none
+    padding: 10px
+    border-radius: 5px
+    width: 100%
+    height: 100%
