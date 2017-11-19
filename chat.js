@@ -100,12 +100,23 @@ module.exports = function (io, api) {
       socket.leave(socket.room);
     });
 
+    //Get langs for render <select> on the client
+    socket.on('getLangs', function(ui) {
+      api.getLangs({ui: ui})
+      .then(function(res) {
+        socket.emit('langsReceived', res)
+      })
+      .catch(function(err) {
+        throw new Error(err);
+      })
+    });
 
     // Handle the sending of messages
     socket.on('msg', function (data) {
-      api.translate({text: data.msg, lang: "en"})
+      api.translate({text: data.msg, lang: data.lang})
       .then(function(response) {        
         socket.broadcast.to(socket.room).emit('receive', {
+          // When the server receives a message, it sends it to the other person in the room.
           msg: response.text[0],
           user: data.user
         });
@@ -114,13 +125,15 @@ module.exports = function (io, api) {
         console.log(err);
       });
       
-      // When the server receives a message, it sends it to the other person in the room.
-      socket.broadcast.to(socket.room).emit('receive', {
-        msg: data.msg,
-        user: data.user
-      });
+      // // When the server receives a message, it sends it to the other person in the room.
+      // socket.broadcast.to(socket.room).emit('receive', {
+      //   msg: data.msg,
+      //   user: data.user
+      // });
 
     });
+
+
   });
 }
 

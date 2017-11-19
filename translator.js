@@ -32,14 +32,23 @@ module.exports = function() {
 
     return request(options); //Promise
   }
-  this.detect = function() {}
-  this.getLangs = function() {
+  this.getLangs = function(params) {
     /*
-      Method GetLangs
+      Method getLangs
       
       Docs: https://tech.yandex.com/translate/doc/dg/reference/getLangs-docpage/
 
     */
-    return request(config.url); //Promise
+    
+    var options = {
+      uri: config.url + "getLangs",
+      qs: {
+        key: config.key,
+        ui: params.ui
+      },
+      json: true // Automatically parses the JSON string in the response
+    };
+
+    return request(options); //Promise
   }
 }

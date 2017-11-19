@@ -2,22 +2,6 @@
 
 $(function () {
 
-  // API Yandex.Translate 
-  var url = "https://translate.yandex.net/api/v1.5/tr.json/";
-  var key = "trnsl.1.1.20160706T224459Z.8bd4ccff283a1e4d.2530860c792d839a3b9d68a48cfcfe51155bac1b";
-
-  // API's methods
-  var action = {
-    translate: "translate",
-    detect: "detect",
-    getLangs: "getLangs"
-  };
-
-  // send data to API Yandex
-  var sendData = {
-    "key": key,
-  };
-
   // browser languge
   var browserLang = navigator.language.split('-')[0];
 
@@ -56,9 +40,9 @@ $(function () {
     leftNickname = $(".nickname-left"),
     loginForm = $(".loginForm"),
     yourName = $("#yourName"),
-    yourLang = $("#yourSelect"),
+    yourSelect = $("#yourSelect"),
     hisName = $("#hisName"),
-    hisLang = $("#hisSelect"),
+    hisSelect = $("#hisSelect"),
     chatForm = $("#chatform"),
     textarea = $("#message"),
     messageTimeSent = $(".timesent"),
@@ -79,7 +63,7 @@ $(function () {
   socket.on('peopleinchat', function (data) {
     if (data.number === 0) {
 
-      getLangs(yourLang); //Get language list from Yandex API
+      getLangs(yourSelect); //Get language list from Yandex API
       showMessage("connected");
 
       loginForm.on('submit', function (e) {
@@ -93,7 +77,7 @@ $(function () {
           return;
         }
 
-        lang = yourLang.val();
+        lang = yourSelect.val();
 
         showMessage("inviteSomebody");
 
@@ -106,7 +90,7 @@ $(function () {
       });
     } else if (data.number === 1) {
 
-      getLangs(hisLang); //Get language list from Yandex API
+      getLangs(hisSelect); //Get language list from Yandex API
 
       showMessage("personinchat", data);
 
@@ -126,7 +110,7 @@ $(function () {
           return;
         }
 
-        lang = hisLang.val();
+        lang = hisSelect.val();
         socket.emit('login', {
           user: name,
           lang: lang,
@@ -207,34 +191,21 @@ $(function () {
   });
 
   chatForm.on('submit', function (e) {
-    //Submitting form
     e.preventDefault();
-
-    // create a new chat message and display it directly
-    sendData.text = textarea.val(); // message
-    sendData.lang = translateLang; // language
-
-    // send request to Yandex.API
-    $.getJSON(url + action.translate, sendData, function (responseData) {
-
-      // save result
-      var message = responseData.text.toString();
-
+    var message = textarea.val();
+    var lang = translateLang;
+    if (message.trim().length) {
       showMessage("chatStarted");
-
-      if (textarea.val().trim().length) {
-        createChatMessage(textarea.val(), name, moment());
-        scrollToBottom();
-
-        // Send the message to the other person in the chat
-        socket.emit('msg', {
-          msg: message,
-          user: name
-        });
-      }
+      // Send the message to the other person in the chat
+      socket.emit('msg', {
+        msg: message,
+        user: name,
+        lang: lang
+      });
+      createChatMessage(message, name, moment());
+      scrollToBottom();
       clearTextarea();
-      
-    });
+    }
   });
 
   updateMessageTimeAgo();
@@ -337,31 +308,26 @@ $(function () {
     }
   }
 
+  
 
-  function getLangs(select) {
-
-    // Add lang to send params
-    sendData.ui = browserLang;
-
-    // Request to API 
-    $.getJSON(url + action.getLangs, sendData, function (response) {
-      var langs = response.langs;
-
-      if (langs) {
-        $.each(langs, function (key, value) {
-          select.append('<option value=' + key + '>' + value + '</option>');
-        });
-        select.val(browserLang); // set default lang
-        select.prop('disabled', false); // enable <select>
-      } else {
-        select.prop('disabled', true); // disable <select>	
-        console.warn('Lang <select> inactive, because network unavaible. ');
-      }
-
+  function getLangs(select, langs) {
+    socket.emit('getLangs', browserLang);
+    socket.on('langsReceived', function (response) {
+      renderLangsList(select, response.langs);
     });
+  }
 
-    // Remove lang from send params when function end
-    delete sendData.ui;
+  function renderLangsList(select, langs) {
+    if (langs) {
+      $.each(langs, function (key, value) {
+        select.append('<option value=' + key + '>' + value + '</option>');
+      });
+      select.val(browserLang); // set default lang
+      select.prop('disabled', false); // enable <select>
+    } else {
+      select.prop('disabled', true); // disable <select>	
+      console.warn('Lang <select> inactive, because network unavaible. ');
+    }
   }
 
   function titleChange(title) {
