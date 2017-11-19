@@ -1,33 +1,28 @@
 {
-  "name": "translator",
-  "version": "0.0.1",
-  "description": "e",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "ejs": "^1.0.0",
-    "express": "^4.8.2",
-    "gravatar": "~1.0.6",
-    "gulp": "^3.9.1",
-    "log4js": "^0.6.38",
-    "socket.io": "1.0.6"
-  },
-  "devDependencies": {
-    "autoprefixer": "^6.3.7",
-    "cssnext": "^1.8.4",
-    "csswring": "^5.1.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-csslint": "^0.3.1",
-    "gulp-cssmin": "^0.1.7",
-    "gulp-imagemin": "^3.0.1",
-    "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.1.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.2",
-    "gulp-uglify": "^1.5.4",
-    "precss": "^1.4.0"
-  }
+    "private": "true",
+    "main": "app.js",
+    "dependencies": {
+        "ejs": "^1.0.0",
+        "express": "^4.8.2",
+        "gulp": "^3.9.1",
+        "log4js": "^0.6.38",
+        "request": "^2.83.0",
+        "request-promise": "^4.2.2",
+        "socket.io": "1.0.6"
+    },
+    "devDependencies": {
+        "autoprefixer": "^6.3.7",
+        "cssnext": "^1.8.4",
+        "csswring": "^5.1.0",
+        "gulp-concat": "^2.6.0",
+        "gulp-csslint": "^0.3.1",
+        "gulp-cssmin": "^0.1.7",
+        "gulp-imagemin": "^3.0.1",
+        "gulp-plumber": "^1.1.0",
+        "gulp-postcss": "^6.1.1",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^2.3.2",
+        "gulp-uglify": "^1.5.4",
+        "precss": "^1.4.0"
+    }
 }

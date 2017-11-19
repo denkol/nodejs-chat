@@ -1,4 +1,5 @@
-module.exports = function (io) {
+
+module.exports = function (io, api) {
 
   // Initialize a new socket.io application, named 'chat'
 
@@ -36,9 +37,8 @@ module.exports = function (io) {
     // When the client emits 'login', save his name and lang,
     // and add them to the room
     socket.on('login', function (data) {
-      console.log(data)
+      
       var room = findClientsSocket(io, data.id);
-      console.log("room: ", room)
 
       // Only two people per room are allowed
       if (room.length < 2) {
@@ -103,12 +103,23 @@ module.exports = function (io) {
 
     // Handle the sending of messages
     socket.on('msg', function (data) {
-
+      api.translate({text: data.msg, lang: "en"})
+      .then(function(response) {        
+        socket.broadcast.to(socket.room).emit('receive', {
+          msg: response.text[0],
+          user: data.user
+        });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+      
       // When the server receives a message, it sends it to the other person in the room.
       socket.broadcast.to(socket.room).emit('receive', {
         msg: data.msg,
         user: data.user
       });
+
     });
   });
 }
